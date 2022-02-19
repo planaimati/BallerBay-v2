@@ -1,4 +1,4 @@
-import { InputActionType, Action, inputStateInterface } from "../action-types";
+import { InputActionType, Action, inputStateInterface } from "../action-types/action-types";
 
 const initialState = {
   email: "",

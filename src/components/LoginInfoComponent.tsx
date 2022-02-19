@@ -9,8 +9,6 @@ interface loginInfoProps {
 const LoginInfoComponent: FC<loginInfoProps> = (props) => {
   const { handleClick, haveAccount } = props;
 
-  console.log(handleClick, haveAccount);
-
   return (
     <StyledContainer>
       <StyledHeader>
@@ -39,7 +37,7 @@ const StyledHeader = styled.h3`
 
 const StyledButton = styled.button`
   background-color: white;
-  color: #313131
+  color: #313131;
   text-transform: uppercase;
   width: 60%;
   height: 50px;
@@ -47,7 +45,6 @@ const StyledButton = styled.button`
   transition: 0.2s;
   border: 1px solid #313131;
   cursor: pointer;
-  
 `;
 
 export default LoginInfoComponent;

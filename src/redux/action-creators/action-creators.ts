@@ -1,8 +1,10 @@
 import { ChangeEvent } from "react";
 import { Dispatch } from "redux";
 import { userHaveAccountAction } from "../reducers/haveAccountReducer";
-import { Action } from "../action-types/index";
-import { InputActionType } from "../action-types/index";
+import { logInAction } from "../reducers/logInReducer";
+import { Action } from "../action-types/action-types";
+import { InputActionType } from "../action-types/action-types";
+import { MouseEvent } from "react";
 
 export const changeHaveAccount = () => {
   return (dispatch: Dispatch<userHaveAccountAction>) => {
@@ -30,11 +32,23 @@ export const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
   };
 };
 
-export const handleConfirmPasswordInput = (e: ChangeEvent<HTMLInputElement>)=>{
-  return(dispatch: Dispatch<Action>)=>{
+export const handleConfirmPasswordInput = (
+  e: ChangeEvent<HTMLInputElement>
+) => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: InputActionType.CONFIRM_PASSWORD,
-      payload: e.target.value
-    })
-  }
-}
+      payload: e.target.value,
+    });
+  };
+};
+
+export const handleLogIn = (e: MouseEvent<HTMLButtonElement>, payload: boolean) => {
+  e.preventDefault();
+  return (dispatch: Dispatch<logInAction>) => {
+    dispatch({
+      type: "SET_LOG_IN",
+      payload: payload
+    });
+  };
+};
