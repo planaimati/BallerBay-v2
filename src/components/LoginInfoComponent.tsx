@@ -4,10 +4,13 @@ import styled from "styled-components";
 interface loginInfoProps {
   haveAccount: boolean | undefined;
   handleClick: () => void;
+
 }
 
+
+
 const LoginInfoComponent: FC<loginInfoProps> = (props) => {
-  const { handleClick, haveAccount } = props;
+  const { handleClick, haveAccount} = props;
 
   return (
     <StyledContainer>

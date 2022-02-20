@@ -4,6 +4,7 @@ export enum InputActionType {
   CONFIRM_PASSWORD = "CONFIRM_USER_PASSWORD",
 }
 
+
 export interface emailActionInterface {
   type: InputActionType.EMAIL;
   payload: string;

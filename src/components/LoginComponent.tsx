@@ -1,5 +1,7 @@
 import React, { FC, MouseEvent } from "react";
 import FormComponent from "./FormComponent";
+import {payloadType} from '../redux/reducers/userReducer';
+
 
 interface loginPropsInterface {
   userHaveAccount: boolean;
@@ -7,6 +9,7 @@ interface loginPropsInterface {
   handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleConfirmPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLogIn: (e: MouseEvent<HTMLButtonElement>, payload: boolean) => void;
+  handleSetUser: (payload: payloadType)=>void
   logedIn: boolean;
   emailValue: string;
   passwordValue: string;
@@ -23,7 +26,8 @@ const LoginComponent: FC<loginPropsInterface> = (props) => {
     confirmPasswordValue,
     handleConfirmPassword,
     handleLogIn,
-    logedIn
+    logedIn,
+    handleSetUser
   } = props;
 
   const logInFormProps = [
@@ -42,7 +46,8 @@ const LoginComponent: FC<loginPropsInterface> = (props) => {
     emailValue,
     passwordValue,
     confirmPasswordValue,
-    logedIn
+    logedIn,
+    handleSetUser
   }
 
   if (userHaveAccount) {

@@ -8,13 +8,18 @@ import { actionCreators } from "../redux/xd";
 import { bindActionCreators } from "redux";
 import { useTypedSelector } from "../hooks/useTypeSelector";
 
+interface containerProps {
+  logedIn: boolean;
+}
+
 const LoginTemplate = () => {
   const { email, password, confirmPassword } = useTypedSelector(
     (state) => state.emailInput
   );
   const { haveAccount } = useTypedSelector((state) => state.haveAccount);
-
   const { logedIn } = useTypedSelector((state) => state.logIn);
+
+  console.log(logedIn);
 
   const dispatch = useDispatch();
   const {
@@ -23,6 +28,7 @@ const LoginTemplate = () => {
     handlePasswordInput,
     handleConfirmPasswordInput,
     handleLogIn,
+    handleSetUser,
   } = bindActionCreators(actionCreators, dispatch);
 
   return (
@@ -38,9 +44,10 @@ const LoginTemplate = () => {
           handleConfirmPassword={handleConfirmPasswordInput}
           logedIn={logedIn}
           handleLogIn={handleLogIn}
+          handleSetUser={handleSetUser}
         />
       </StyledFormContainer>
-      <StyledRegistrationContainer>
+      <StyledRegistrationContainer logedIn={logedIn}>
         <LoginInfoComponent
           handleClick={changeHaveAccount}
           haveAccount={haveAccount}
@@ -67,10 +74,10 @@ const StyledFormContainer = styled.div`
   height: 40%;
 `;
 
-const StyledRegistrationContainer = styled.div`
+const StyledRegistrationContainer = styled.div<containerProps>`
   height: 20%;
   width: 100%;
-  display: flex;
+  display: ${(props) => (props.logedIn ? "none" : "flex")};
   align-items: center;
   justify-content: center;
   background-color: #f4f4f4;

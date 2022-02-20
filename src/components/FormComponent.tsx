@@ -1,7 +1,8 @@
 import React, { FC, ChangeEvent, MouseEvent } from "react";
 import styled from "styled-components";
 import { AiFillLock, AiOutlineMail } from "react-icons/ai";
-import { logInFunction } from "../utils/utils";
+import { logInFunction, logOutFunction } from "../utils/utils";
+import { payloadType } from "../redux/reducers/userReducer";
 
 type formProps = {
   type: string;
@@ -9,12 +10,17 @@ type formProps = {
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
+interface containerProps {
+  logedIn: boolean;
+}
+
 type logInFuncParamsProps = {
   handleLogIn: (e: MouseEvent<HTMLButtonElement>, payload: boolean) => void;
   emailValue: string;
   passwordValue: string;
   confirmPasswordValue?: string;
   logedIn: boolean;
+  handleSetUser: (payload: payloadType) => void;
 };
 
 interface formComponentInterface {
@@ -33,45 +39,55 @@ const FormComponent: FC<formComponentInterface> = (
     passwordValue,
     confirmPasswordValue,
     logedIn,
+    handleSetUser,
   } = logInFuncParams;
   return (
     <StyledForm>
       <StyledHeader>
-        {haveAccount ? "Zaloguj się" : "Zarejestruj się"}
+        {logedIn
+          ? "Zalogowano"
+          : haveAccount
+          ? "Zaloguj się"
+          : "Zarejestruj się"}
       </StyledHeader>
-      {formProps.map((item, index) => {
-        return (
-          <StyledInputContainer key={index}>
-            <StyledIconContainer>
-              {item.type === "email" ? (
-                <AiOutlineMail size="25px" />
-              ) : (
-                <AiFillLock size="25px" />
-              )}
-            </StyledIconContainer>
-            <StyledInput
-              onChange={item.handleInput}
-              value={item.value}
-              type={item.type}
-            />
-          </StyledInputContainer>
-        );
-      })}
-
-      <StyledMessageContainer>
+      <StyledInputsContainer logedIn={logedIn}>
+        {formProps.map((item, index) => {
+          return (
+            <StyledInputContainer key={index}>
+              <StyledIconContainer>
+                {item.type === "email" ? (
+                  <AiOutlineMail size="25px" />
+                ) : (
+                  <AiFillLock size="25px" />
+                )}
+              </StyledIconContainer>
+              <StyledInput
+                onChange={item.handleInput}
+                value={item.value}
+                type={item.type}
+              />
+            </StyledInputContainer>
+          );
+        })}
+      </StyledInputsContainer>
+      <StyledMessageContainer logedIn={logedIn}>
         <StyledMessageText>wprowadź dane</StyledMessageText>
       </StyledMessageContainer>
 
       <StyledButton
-        onClick={(e) =>
-          logInFunction(
-            e,
-            emailValue,
-            passwordValue,
-            handleLogIn,
-            haveAccount ? "login" : "register",
-            confirmPasswordValue
-          )
+        onClick={
+          !logedIn
+            ? (e) =>
+                logInFunction(
+                  e,
+                  emailValue,
+                  passwordValue,
+                  handleLogIn,
+                  haveAccount ? "login" : "register",
+                  handleSetUser,
+                  confirmPasswordValue
+                )
+            : (e) => logOutFunction(e, handleLogIn)
         }
       >
         {logedIn ? "Wyloguj" : haveAccount ? "Zaloguj się" : "Zarejstruj się"}
@@ -83,10 +99,19 @@ const FormComponent: FC<formComponentInterface> = (
 const StyledForm = styled.form`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
   width: 60%;
   height: 100%;
+`;
+
+const StyledInputsContainer = styled.div<containerProps>`
+  height: 50%;
+  width: 100%;
+  display: ${(props) => (props.logedIn ? "none" : "flex")};
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 `;
 
 const StyledInputContainer = styled.div`
@@ -112,7 +137,9 @@ const StyledInput = styled.input`
   border: 1px solid #dddddd;
 `;
 
-const StyledMessageContainer = styled.div``;
+const StyledMessageContainer = styled.div<containerProps>`
+  display: ${(props) => (props.logedIn ? "none" : "flex")};
+`;
 
 const StyledMessageText = styled.p``;
 

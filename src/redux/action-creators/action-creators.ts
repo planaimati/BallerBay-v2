@@ -5,6 +5,9 @@ import { logInAction } from "../reducers/logInReducer";
 import { Action } from "../action-types/action-types";
 import { InputActionType } from "../action-types/action-types";
 import { MouseEvent } from "react";
+import { userActionInterface } from "../reducers/userReducer";
+import { payloadType } from "../reducers/userReducer";
+
 
 export const changeHaveAccount = () => {
   return (dispatch: Dispatch<userHaveAccountAction>) => {
@@ -52,3 +55,12 @@ export const handleLogIn = (e: MouseEvent<HTMLButtonElement>, payload: boolean) 
     });
   };
 };
+
+export const handleSetUser = (payload: payloadType )=>{
+  return (dispatch: Dispatch<userActionInterface>)=>{
+    dispatch({
+      type: "SET_USER",
+      payload: payload
+    })
+  }
+}

@@ -2,9 +2,11 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useTypedSelector } from "../hooks/useTypeSelector";
 
 const NavigationTemplate: FC = () => {
   let location = useLocation();
+  const { admin } = useTypedSelector((state) => state.user);
 
   return (
     <Header
@@ -79,6 +81,16 @@ const NavigationTemplate: FC = () => {
                 Login
               </StyledLink>
             </StyledListItem>
+            {admin ? (
+              <StyledListItem>
+                <StyledLink
+                  color={location.pathname === "/" ? "white" : "black"}
+                  to="/admin"
+                >
+                  Admin panel
+                </StyledLink>
+              </StyledListItem>
+            ) : null}
           </StyledList>
         </ListContainer>
       </Navigation>
@@ -157,7 +169,7 @@ const StyledList = styled.ul`
   display: grid;
   list-style: none;
   margin: 0;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
   text-transform: uppercase;
   text-decoration: none;
   @media (max-width: 500px) {
