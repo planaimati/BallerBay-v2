@@ -19,7 +19,6 @@ const LoginTemplate = () => {
   const { haveAccount } = useTypedSelector((state) => state.haveAccount);
   const { logedIn } = useTypedSelector((state) => state.logIn);
 
-  console.log(logedIn);
 
   const dispatch = useDispatch();
   const {
@@ -29,6 +28,7 @@ const LoginTemplate = () => {
     handleConfirmPasswordInput,
     handleLogIn,
     handleSetUser,
+    handleDeleteUser
   } = bindActionCreators(actionCreators, dispatch);
 
   return (
@@ -45,6 +45,7 @@ const LoginTemplate = () => {
           logedIn={logedIn}
           handleLogIn={handleLogIn}
           handleSetUser={handleSetUser}
+          handleDeleteUser={handleDeleteUser}
         />
       </StyledFormContainer>
       <StyledRegistrationContainer logedIn={logedIn}>

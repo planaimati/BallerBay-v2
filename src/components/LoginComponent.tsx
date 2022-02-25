@@ -1,7 +1,6 @@
 import React, { FC, MouseEvent } from "react";
 import FormComponent from "./FormComponent";
-import {payloadType} from '../redux/reducers/userReducer';
-
+import { userPayloadType } from "../redux/action-types/action-types"
 
 interface loginPropsInterface {
   userHaveAccount: boolean;
@@ -9,7 +8,8 @@ interface loginPropsInterface {
   handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleConfirmPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLogIn: (e: MouseEvent<HTMLButtonElement>, payload: boolean) => void;
-  handleSetUser: (payload: payloadType)=>void
+  handleSetUser: (payload: userPayloadType) => void;
+  handleDeleteUser: () => void;
   logedIn: boolean;
   emailValue: string;
   passwordValue: string;
@@ -27,7 +27,8 @@ const LoginComponent: FC<loginPropsInterface> = (props) => {
     handleConfirmPassword,
     handleLogIn,
     logedIn,
-    handleSetUser
+    handleSetUser,
+    handleDeleteUser,
   } = props;
 
   const logInFormProps = [
@@ -38,7 +39,11 @@ const LoginComponent: FC<loginPropsInterface> = (props) => {
   const registerFormProps = [
     { type: "email", value: emailValue, handleInput: handleEmail },
     { type: "password", value: passwordValue, handleInput: handlePassword },
-    { type: "password", value: confirmPasswordValue, handleInput: handleConfirmPassword },
+    {
+      type: "password",
+      value: confirmPasswordValue,
+      handleInput: handleConfirmPassword,
+    },
   ];
 
   const logInFunctionParams = {
@@ -47,16 +52,27 @@ const LoginComponent: FC<loginPropsInterface> = (props) => {
     passwordValue,
     confirmPasswordValue,
     logedIn,
-    handleSetUser
-  }
+    handleSetUser,
+    handleDeleteUser,
+  };
 
   if (userHaveAccount) {
-    return <FormComponent formProps={logInFormProps} haveAccount={userHaveAccount} logInFuncParams={logInFunctionParams} />;
+    return (
+      <FormComponent
+        formProps={logInFormProps}
+        haveAccount={userHaveAccount}
+        logInFuncParams={logInFunctionParams}
+      />
+    );
   } else {
-    return <FormComponent formProps={registerFormProps} haveAccount={userHaveAccount} logInFuncParams={logInFunctionParams} />;
+    return (
+      <FormComponent
+        formProps={registerFormProps}
+        haveAccount={userHaveAccount}
+        logInFuncParams={logInFunctionParams}
+      />
+    );
   }
 };
-
-
 
 export default LoginComponent;

@@ -1,14 +1,4 @@
-export type payloadType = {
-  admin: boolean;
-  email: string;
-  password: string;
-}
-
-export interface userActionInterface {
-  type: "SET_USER";
-  payload: payloadType
-}
-
+import { UserAction, UserActionType } from "../action-types/action-types";
 
 
 export interface userState {
@@ -21,14 +11,23 @@ const initialState = {
 
 const userReducer = (
   state: userState = initialState,
-  action: userActionInterface
+  action: UserAction
 ) => {
   switch (action.type) {
-    case "SET_USER":
+    case UserActionType.SET_USER:
       return {
         ...state,
         admin: action.payload.admin,
       };
+
+    case UserActionType.DELETE_USER:
+
+    return{
+      ...state,
+      admin: false
+    }
+
+    
     default:
       return state;
   }

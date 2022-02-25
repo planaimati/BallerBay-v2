@@ -4,6 +4,12 @@ const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
 }
+
+html {
+    font-size: 62.5%;
+    
+   
+  }
 body{
     
     margin:0;
@@ -13,6 +19,7 @@ body{
     width: 100vw;
     box-sizing: border-box;
     overflow-x: hidden;
+    font-size: 1.6rem;
     
     
 }

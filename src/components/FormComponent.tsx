@@ -2,7 +2,7 @@ import React, { FC, ChangeEvent, MouseEvent } from "react";
 import styled from "styled-components";
 import { AiFillLock, AiOutlineMail } from "react-icons/ai";
 import { logInFunction, logOutFunction } from "../utils/utils";
-import { payloadType } from "../redux/reducers/userReducer";
+import { userPayloadType } from "../redux/action-types/action-types";
 
 type formProps = {
   type: string;
@@ -20,7 +20,8 @@ type logInFuncParamsProps = {
   passwordValue: string;
   confirmPasswordValue?: string;
   logedIn: boolean;
-  handleSetUser: (payload: payloadType) => void;
+  handleSetUser: (payload: userPayloadType) => void;
+  handleDeleteUser: () => void;
 };
 
 interface formComponentInterface {
@@ -40,6 +41,7 @@ const FormComponent: FC<formComponentInterface> = (
     confirmPasswordValue,
     logedIn,
     handleSetUser,
+    handleDeleteUser,
   } = logInFuncParams;
   return (
     <StyledForm>
@@ -87,7 +89,7 @@ const FormComponent: FC<formComponentInterface> = (
                   handleSetUser,
                   confirmPasswordValue
                 )
-            : (e) => logOutFunction(e, handleLogIn)
+            : (e) => logOutFunction(e, handleLogIn, handleDeleteUser)
         }
       >
         {logedIn ? "Wyloguj" : haveAccount ? "Zaloguj się" : "Zarejstruj się"}

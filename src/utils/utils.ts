@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { payloadType } from "../redux/reducers/userReducer";
+import { userPayloadType } from "../redux/action-types/action-types";
 
 export const logInFunction = (
   e: MouseEvent<HTMLButtonElement>,
@@ -7,11 +7,10 @@ export const logInFunction = (
   password: string,
   callback: Function,
   url: string,
-  setUser: (payload: payloadType) => void,
+  setUser: (payload: userPayloadType) => void,
   confirmPassword?: string
 ) => {
   e.preventDefault();
-  console.log("loginfunc");
 
   const user = {
     email: email,
@@ -19,36 +18,38 @@ export const logInFunction = (
     confirmPassword: confirmPassword,
   };
 
-  fetch(`http://localhost:8080/api/v1/${url}`, {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
-  }).then((response) => {
-    if (url === "login" && response.ok) {
-      callback(e, true);
-    }
+  })
+    .then((response) => {
+      if (url === "login" && response.ok) {
+        callback(e, true);
+      }
 
-    console.log(response.json());
-
-    //return response.json();
-  });
-  // .then((data) => {
-  //   setUser(data);
-  // });
+      return response.json();
+    })
+    .then((data) => {
+      setUser(data);
+    });
 };
 
 export const logOutFunction = (
   e: MouseEvent<HTMLButtonElement>,
-  callback: Function
+  logout: Function,
+  deleteUser: Function
 ) => {
   e.preventDefault();
-  console.log("XD");
 
-  fetch(`http://localhost:8080/api/v1/logout`).then((response) => {
-    if (response.ok) {
-      callback(e, false);
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/logout`).then(
+    (response) => {
+      if (response.ok) {
+        logout(e, false);
+        deleteUser();
+      }
     }
-  });
+  );
 };
