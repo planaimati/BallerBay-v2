@@ -3,9 +3,6 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypeSelector";
-import { FaRegUser } from "react-icons/fa";
-import { BsCart } from "react-icons/bs";
-
 const NavigationTemplate: FC = () => {
   let location = useLocation();
   const { admin } = useTypedSelector((state) => state.user);
@@ -24,7 +21,7 @@ const NavigationTemplate: FC = () => {
               color={location.pathname === "/" ? "black" : "black"}
               to="/products"
             >
-              Products
+              Produkty
             </StyledLink>
           </StyledListItem>
           <StyledListItem>
@@ -32,7 +29,7 @@ const NavigationTemplate: FC = () => {
               color={location.pathname === "/" ? "black" : "black"}
               to="/about"
             >
-              About
+              O nas
             </StyledLink>
           </StyledListItem>
         </StyledList>
@@ -44,11 +41,11 @@ const NavigationTemplate: FC = () => {
               color={location.pathname === "/" ? "black" : "black"}
               to="/contact"
             >
-              Contact
+              Kontakt
             </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to={"/login"}>account</StyledLink>
+            <StyledLink to={"/login"}>konto</StyledLink>
           </StyledListItem>
           {admin ? (
             <StyledListItem>
@@ -61,7 +58,7 @@ const NavigationTemplate: FC = () => {
             </StyledListItem>
           ) : null}
           <StyledListItem>
-            <StyledLink to={"/cart"}>{`bag(${cart.length})`}</StyledLink>
+            <StyledLink to={"/cart"}>{`koszyk(${cart.length})`}</StyledLink>
           </StyledListItem>
         </StyledRightSideList>
       </StyledRightSideContainer>
@@ -78,6 +75,14 @@ const StyledNavContainer = styled.div`
   z-index: 1;
   height: 5%;
   background-color: white;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 17%;
+  }
+  @media (max-width: 500px) {
+    flex-direction: column;
+    height: 20%;
+  }
 `;
 
 const StyledLeftSideContainer = styled.div`
@@ -86,6 +91,9 @@ const StyledLeftSideContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   height: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledRightSideContainer = styled.div`
@@ -94,6 +102,9 @@ const StyledRightSideContainer = styled.div`
   height: 100%;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledLogoContainer = styled.div`
@@ -110,8 +121,11 @@ const LogoLink = styled(Link)`
   letter-spacing: 0;
   font-weight: 700;
   color: black;
-  @media (max-width: 700px) {
-    font-size: 2rem;
+  @media (max-width: 768px) {
+    font-size: 1.7rem;
+  }
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -126,13 +140,20 @@ const StyledList = styled.ul`
   height: 100%;
   text-transform: uppercase;
   text-decoration: none;
-  @media (max-width: 500px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 1024px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
 const StyledRightSideList = styled(StyledList)`
   width: 40%;
+  @media (max-width: 1024px) {
+    width: 60%;
+  }
 `;
 
 const StyledListItem = styled.li`

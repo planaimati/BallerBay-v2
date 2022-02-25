@@ -26,9 +26,9 @@ const CartTemplate = () => {
         ))
       ) : (
         <>
-          <StyledInfo>Your cart is currently empty.</StyledInfo>
+          <StyledInfo>Twój koszyk jest pusty.</StyledInfo>
           <StyledLink to={`/products`}>
-            <ButtonComponent value="back to shopping"></ButtonComponent>
+            <ButtonComponent value="Powrót do sklepu"></ButtonComponent>
           </StyledLink>
         </>
       )}

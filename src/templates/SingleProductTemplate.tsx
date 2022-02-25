@@ -61,6 +61,9 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledImageContainer = styled.div`
@@ -69,6 +72,12 @@ const StyledImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 40%;
+    width: 50%;
+    margin-top: 15rem;
+  }
 `;
 
 const StyledInfoContainer = styled.div`
@@ -78,6 +87,10 @@ const StyledInfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 60%;
+    justify-content: flex-start;
+  }
 `;
 
 const StyledText = styled.p`
@@ -96,6 +109,10 @@ const StyledBoldText = styled.p<boldTextPropsInterface>`
 const StyledImage = styled.img`
   height: 80%;
   width: 80%;
+  @media (max-width: 768px) {
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 const StyledButton = styled.button`

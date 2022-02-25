@@ -105,6 +105,9 @@ const StyledForm = styled.form`
   flex-direction: column;
   width: 60%;
   height: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const StyledInputsContainer = styled.div<containerProps>`

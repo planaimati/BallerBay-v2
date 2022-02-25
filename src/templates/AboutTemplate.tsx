@@ -9,7 +9,7 @@ const AboutTemplate = () => {
         <StyledImageContainer></StyledImageContainer>
         <StyledTextContainer>
           <StyledHeaderContainer>
-            <StyledHeader>About Us</StyledHeader>
+            <StyledHeader>Kim jesteśmy?</StyledHeader>
           </StyledHeaderContainer>
           <StyledText>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio
@@ -23,7 +23,7 @@ const AboutTemplate = () => {
           </StyledText>
 
           <StyledHeaderContainer>
-            <StyledHeader>Our history</StyledHeader>
+            <StyledHeader>Dlaczego warto nam zaufać</StyledHeader>
           </StyledHeaderContainer>
 
           <StyledText>

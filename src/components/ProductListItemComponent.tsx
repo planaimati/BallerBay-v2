@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 interface propsInterface {
   productId: string;
   productName: string;
@@ -43,6 +42,7 @@ const StyledContainer = styled.div`
   justify-items: center;
   align-items: center;
   border-bottom: 1px solid black;
+  margin: 2rem;
 `;
 const StyledImage = styled.img`
   width: 100%;
@@ -81,7 +81,7 @@ const StyledImageContainer = styled.div`
   height: 70%;
   width: 100%;
   @media (max-width: 700px) {
-    width: 50vw;
+    width: 100%;
   }
 `;
 
@@ -100,7 +100,5 @@ const StyledDetail = styled.p`
   margin: 0;
   line-height: 18px;
 `;
-
-
 
 export default ProductListItem;

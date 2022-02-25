@@ -19,7 +19,6 @@ const LoginTemplate = () => {
   const { haveAccount } = useTypedSelector((state) => state.haveAccount);
   const { logedIn } = useTypedSelector((state) => state.logIn);
 
-
   const dispatch = useDispatch();
   const {
     changeHaveAccount,
@@ -28,7 +27,7 @@ const LoginTemplate = () => {
     handleConfirmPasswordInput,
     handleLogIn,
     handleSetUser,
-    handleDeleteUser
+    handleDeleteUser,
   } = bindActionCreators(actionCreators, dispatch);
 
   return (
@@ -73,6 +72,10 @@ const StyledFormContainer = styled.div`
   justify-content: center;
   width: 40%;
   height: 40%;
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
 `;
 
 const StyledRegistrationContainer = styled.div<containerProps>`

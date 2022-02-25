@@ -101,6 +101,9 @@ const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const StyledForm = styled(Form)`
@@ -110,6 +113,9 @@ const StyledForm = styled(Form)`
   flex-direction: column;
   width: 70%;
   height: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const InputContainer = styled.div`

@@ -50,11 +50,14 @@ const StyledContainer = styled.div`
 const StyledItemsContainer = styled.div`
   height: 70%;
   margin: 150px auto 0 auto;
-  max-width: 1170px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  column-gap: 1.8rem;
-  row-gap: 1.8rem;
+  width: 1170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export default ProductsListTemplate;

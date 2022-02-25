@@ -4,13 +4,10 @@ import styled from "styled-components";
 interface loginInfoProps {
   haveAccount: boolean | undefined;
   handleClick: () => void;
-
 }
 
-
-
 const LoginInfoComponent: FC<loginInfoProps> = (props) => {
-  const { handleClick, haveAccount} = props;
+  const { handleClick, haveAccount } = props;
 
   return (
     <StyledContainer>
@@ -31,11 +28,23 @@ const StyledContainer = styled.div`
   flex-direction: column;
   height: 80%;
   width: 40%;
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const StyledHeader = styled.h3`
   font-size: 25px;
   letter-spacing: 1.3px;
+  @media (max-width: 1024px) {
+    font-size: 2.2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const StyledButton = styled.button`
