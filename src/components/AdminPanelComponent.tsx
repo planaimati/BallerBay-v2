@@ -95,14 +95,15 @@ const AdminPanelComponent = () => {
 };
 
 const StyledContainer = styled.div`
-  height: 70%;
+  height: 100%;
   width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   @media (max-width: 768px) {
-    width: 60%;
+    width: 80%;
+    padding-top: 15rem;
   }
 `;
 
@@ -112,7 +113,7 @@ const StyledForm = styled(Form)`
   justify-content: space-around;
   flex-direction: column;
   width: 70%;
-  height: 100%;
+  height: 70%;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -142,8 +143,11 @@ const StyledInput = styled(Field)`
 `;
 
 const StyledHeader = styled.h3`
-  font-size: 25px;
+  font-size: 2.5rem;
   letter-spacing: 1.3px;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const StyledButton = styled.button`

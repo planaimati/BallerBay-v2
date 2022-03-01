@@ -5,9 +5,13 @@ export const logInFunction = (
   e: MouseEvent<HTMLButtonElement>,
   email: string,
   password: string,
-  callback: Function,
   url: string,
+  setLogin: Function,
   setUser: (payload: userPayloadType) => void,
+  setHaveAccount: () => void,
+  setLoginValue: (e: string) => void,
+  setPasswordValue: (e: string) => void,
+  setConfirmPasswordValue: (e: string) => void,
   confirmPassword?: string
 ) => {
   e.preventDefault();
@@ -18,7 +22,7 @@ export const logInFunction = (
     confirmPassword: confirmPassword,
   };
 
-  fetch(`https://ballerbay-api.herokuapp.com/api/v1/${url}`, {
+  fetch(`http://localhost:8000/api/v1/${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,8 +31,16 @@ export const logInFunction = (
   })
     .then((response) => {
       if (url === "login" && response.ok) {
-        callback(e, true);
+        setLogin(e, true);
       }
+
+      if (url === "register" && response.ok) {
+        setHaveAccount();
+      }
+
+      setConfirmPasswordValue("");
+      setLoginValue("");
+      setPasswordValue("");
 
       return response.json();
     })
@@ -44,12 +56,14 @@ export const logOutFunction = (
 ) => {
   e.preventDefault();
 
-  fetch(`https://ballerbay-api.herokuapp.com/api/v1/logout`).then(
-    (response) => {
+  fetch(`http://localhost:8000/api/v1/logout`)
+    .then((response) => {
       if (response.ok) {
         logout(e, false);
         deleteUser();
       }
-    }
-  );
+
+      return response.json();
+    })
+    .then((data) => console.log(data));
 };

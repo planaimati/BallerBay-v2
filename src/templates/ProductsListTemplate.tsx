@@ -45,6 +45,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 5rem;
 `;
 
 const StyledItemsContainer = styled.div`

@@ -47,11 +47,15 @@ const StyledContainer = styled.div`
   justify-content: center;
   @media (max-width: 700px) {
     min-height: 80vh;
+    width: 90%;
   }
 `;
 
 const StyledLink = styled(Link)`
   width: 30%;
+  @media (max-width: 700px) {
+    width: 80%;
+  }
 `;
 
 const StyledInfo = styled.p`

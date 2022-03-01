@@ -26,31 +26,33 @@ export const changeHaveAccount = () => {
   };
 };
 
-export const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+export const handleEmailInput = (e: ChangeEvent<HTMLInputElement> | string) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: InputActionType.EMAIL,
-      payload: e.target.value,
+      payload: typeof e === "string" ? e : e.target.value,
     });
   };
 };
 
-export const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
+export const handlePasswordInput = (
+  e: ChangeEvent<HTMLInputElement> | string
+) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: InputActionType.PASSWORD,
-      payload: e.target.value,
+      payload: typeof e === "string" ? e : e.target.value,
     });
   };
 };
 
 export const handleConfirmPasswordInput = (
-  e: ChangeEvent<HTMLInputElement>
+  e: ChangeEvent<HTMLInputElement> | string
 ) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: InputActionType.CONFIRM_PASSWORD,
-      payload: e.target.value,
+      payload: typeof e === "string" ? e : e.target.value,
     });
   };
 };

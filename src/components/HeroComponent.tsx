@@ -1,4 +1,3 @@
-
 import React, { FC } from "react";
 import styled from "styled-components";
 
@@ -35,6 +34,8 @@ const StyledHeroContainer = styled.div<HeroContainerProps>`
   background-size: cover;
   @media (max-width: 700px) {
     font-size: 2rem;
+    background-position: center;
+    margin-top: 20rem;
   }
 `;
 const StyledBanner = styled.div`
@@ -45,14 +46,14 @@ const StyledBanner = styled.div`
 `;
 
 const StyledTitle = styled.p`
-text-transform: uppercase;
-    font-size: 4rem;
-    letter-spacing: 2px;
-    color: white;
-    margin: 0;
-    @media (max-width: 700px) {
-      font-size: 2rem;
-    }
-`
+  text-transform: uppercase;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  color: white;
+  margin: 0;
+  @media (max-width: 700px) {
+    font-size: 2rem;
+  }
+`;
 
 export default HeroComponent;

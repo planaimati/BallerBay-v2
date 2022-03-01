@@ -43,7 +43,7 @@ const StyledHeader = styled.h3`
     font-size: 2.2rem;
   }
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 `;
 

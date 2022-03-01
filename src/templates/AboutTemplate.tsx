@@ -68,6 +68,9 @@ const StyledContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 17vh;
+  @media (max-width: 768px) {
+    margin-top: 22rem;
+  }
 `;
 
 const StyledImageContainer = styled.div`
@@ -97,7 +100,7 @@ const StyledTextContainer = styled.div`
 
 const StyledText = styled.p`
   color: black;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 200;
   text-align: center;
   line-height: 2.8rem;
@@ -106,6 +109,9 @@ const StyledText = styled.p`
   margin-top: 3rem;
   margin-bottom: 3rem;
   text-align: justify;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const StyledHeaderContainer = styled.div`
@@ -116,10 +122,13 @@ const StyledHeaderContainer = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #111111;
   font-weight: 300;
   letter-spacing: 0.3rem;
+  @media (max-width: 768px) {
+    font-size: 1.7rem;
+  }
 `;
 
 const StyledLine = styled.div`

@@ -17,8 +17,6 @@ const ProductListItem: FC<propsInterface> = (props) => {
   const { productName, productPrice, productImage, productSize, productId } =
     props;
 
-  console.log(productId);
-
   return (
     <StyledContainer>
       <StyledImageContainer>

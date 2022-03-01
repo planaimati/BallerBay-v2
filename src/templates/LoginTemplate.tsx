@@ -25,9 +25,6 @@ const LoginTemplate = () => {
     handleEmailInput,
     handlePasswordInput,
     handleConfirmPasswordInput,
-    handleLogIn,
-    handleSetUser,
-    handleDeleteUser,
   } = bindActionCreators(actionCreators, dispatch);
 
   return (
@@ -41,10 +38,6 @@ const LoginTemplate = () => {
           handlePassword={handlePasswordInput}
           confirmPasswordValue={confirmPassword}
           handleConfirmPassword={handleConfirmPasswordInput}
-          logedIn={logedIn}
-          handleLogIn={handleLogIn}
-          handleSetUser={handleSetUser}
-          handleDeleteUser={handleDeleteUser}
         />
       </StyledFormContainer>
       <StyledRegistrationContainer logedIn={logedIn}>
@@ -75,6 +68,7 @@ const StyledFormContainer = styled.div`
 
   @media (max-width: 768px) {
     width: 70%;
+    margin-top: 10rem;
   }
 `;
 

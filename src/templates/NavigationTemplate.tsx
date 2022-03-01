@@ -68,6 +68,7 @@ const NavigationTemplate: FC = () => {
 
 const StyledNavContainer = styled.div`
   position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -82,6 +83,7 @@ const StyledNavContainer = styled.div`
   @media (max-width: 500px) {
     flex-direction: column;
     height: 20%;
+    justify-content: space-between;
   }
 `;
 
@@ -93,6 +95,7 @@ const StyledLeftSideContainer = styled.div`
   height: 100%;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 38%;
   }
 `;
 
@@ -104,6 +107,7 @@ const StyledRightSideContainer = styled.div`
   justify-content: flex-end;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 38%;
   }
 `;
 
@@ -172,7 +176,7 @@ const StyledLink = styled(NavLink)`
   color: ${(props) => (props.color === "white" ? "white" : "black")};
   @media (max-width: 500px) {
     letter-spacing: 0.3rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   &.active {
     font-weight: 700;

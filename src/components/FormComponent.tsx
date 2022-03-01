@@ -1,8 +1,11 @@
-import React, { FC, ChangeEvent, MouseEvent } from "react";
+import React, { FC, ChangeEvent } from "react";
 import styled from "styled-components";
 import { AiFillLock, AiOutlineMail } from "react-icons/ai";
 import { logInFunction, logOutFunction } from "../utils/utils";
-import { userPayloadType } from "../redux/action-types/action-types";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../redux/xd";
+import { bindActionCreators } from "redux";
+import { useTypedSelector } from "../hooks/useTypeSelector";
 
 type formProps = {
   type: string;
@@ -14,35 +17,33 @@ interface containerProps {
   logedIn: boolean;
 }
 
-type logInFuncParamsProps = {
-  handleLogIn: (e: MouseEvent<HTMLButtonElement>, payload: boolean) => void;
-  emailValue: string;
-  passwordValue: string;
-  confirmPasswordValue?: string;
-  logedIn: boolean;
-  handleSetUser: (payload: userPayloadType) => void;
-  handleDeleteUser: () => void;
-};
-
 interface formComponentInterface {
   formProps: formProps[];
-  haveAccount: boolean;
-  logInFuncParams: logInFuncParamsProps;
 }
 
 const FormComponent: FC<formComponentInterface> = (
   props: formComponentInterface
 ) => {
-  const { formProps, haveAccount, logInFuncParams } = props;
+  const { formProps } = props;
+
+  const { email, password, confirmPassword } = useTypedSelector(
+    (state) => state.emailInput
+  );
+
+  const { haveAccount } = useTypedSelector((state) => state.haveAccount);
+  const { logedIn } = useTypedSelector((state) => state.logIn);
+
+  const dispatch = useDispatch();
   const {
+    changeHaveAccount,
+    handleEmailInput,
+    handlePasswordInput,
+    handleConfirmPasswordInput,
     handleLogIn,
-    emailValue,
-    passwordValue,
-    confirmPasswordValue,
-    logedIn,
     handleSetUser,
     handleDeleteUser,
-  } = logInFuncParams;
+  } = bindActionCreators(actionCreators, dispatch);
+
   return (
     <StyledForm>
       <StyledHeader>
@@ -82,12 +83,16 @@ const FormComponent: FC<formComponentInterface> = (
             ? (e) =>
                 logInFunction(
                   e,
-                  emailValue,
-                  passwordValue,
-                  handleLogIn,
+                  email,
+                  password,
                   haveAccount ? "login" : "register",
+                  handleLogIn,
                   handleSetUser,
-                  confirmPasswordValue
+                  changeHaveAccount,
+                  handleEmailInput,
+                  handlePasswordInput,
+                  handleConfirmPasswordInput,
+                  confirmPassword
                 )
             : (e) => logOutFunction(e, handleLogIn, handleDeleteUser)
         }

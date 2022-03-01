@@ -8,7 +8,10 @@ import { actionCreators } from "../redux/xd";
 import { bindActionCreators } from "redux";
 
 interface boldTextPropsInterface {
-  fontSize: number;
+  fontSize?: number;
+  color?: string;
+  weight?: number;
+  left?: number;
 }
 
 const SingleProductTemplate = () => {
@@ -34,16 +37,43 @@ const SingleProductTemplate = () => {
           <StyledImage src={singleProduct.productImage} />
         </StyledImageContainer>
         <StyledInfoContainer>
-          <StyledBoldText fontSize={2}>
-            {singleProduct.productName}
-          </StyledBoldText>
-          <StyledText>{singleProduct.productBrand}</StyledText>
-          <StyledText>{singleProduct.productSize}</StyledText>
+          <StyledBoldTextContainer>
+            <StyledBoldText fontSize={2}>
+              {singleProduct.productBrand}
+            </StyledBoldText>
+            <StyledBoldText fontSize={1.2} weight={300}>
+              {singleProduct.productName}
+            </StyledBoldText>
+          </StyledBoldTextContainer>
+
           <StyledBoldText
-            fontSize={1.3}
+            fontSize={1.5}
           >{`${singleProduct.productPrice} PLN`}</StyledBoldText>
+          <StyledColorInfoContainer>
+            <StyledColorInfoSmallContainer left={0}>
+              <StyledText fontSize={0.8} color="#727272">
+                kolor
+              </StyledText>
+              <StyledText fontSize={1} color="black">
+                czarny
+              </StyledText>
+            </StyledColorInfoSmallContainer>
+            <StyledColorInfoSmallContainer left={1}>
+              <StyledText fontSize={0.8} color="#727272">
+                rozmiar
+              </StyledText>
+              <StyledText fontSize={1} color="black">
+                {singleProduct.productSize}
+              </StyledText>
+            </StyledColorInfoSmallContainer>
+          </StyledColorInfoContainer>
           {!logedIn ? (
-            <StyledLink to={"/login"}>Zaloguj się</StyledLink>
+            <StyledButtonContainer>
+              <StyledLink to={"/login"}>Zaloguj się</StyledLink>
+              <StyledText fontSize={1}>
+                Zaloguj się aby dodać produkt do koszyka
+              </StyledText>
+            </StyledButtonContainer>
           ) : (
             <StyledButton onClick={() => handleSetCart(singleProduct)}>
               Dodaj do koszyka
@@ -63,20 +93,21 @@ const StyledContainer = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     flex-direction: column;
+    height: 150vh;
   }
 `;
 
 const StyledImageContainer = styled.div`
-  width: 30%;
-  height: 50%;
+  width: 50%;
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 40%;
-    width: 50%;
-    margin-top: 15rem;
+    height: 30%;
+    width: 90%;
+    
   }
 `;
 
@@ -86,24 +117,56 @@ const StyledInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-around;
   @media (max-width: 768px) {
-    width: 60%;
-    justify-content: flex-start;
+    width: 80%;
+    height: 30%;
+    justify-content: space-around;
   }
 `;
 
-const StyledText = styled.p`
+const StyledBoldTextContainer = styled.div`
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const StyledColorInfoContainer = styled.div`
+  width: 100%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledColorInfoSmallContainer = styled.div<boldTextPropsInterface>`
+  display: flex;
+  width: 45%;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 1px solid black; ;
+`;
+
+const StyledText = styled.p<boldTextPropsInterface>`
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: ${(props) => props.fontSize}rem;
   text-align: center;
+  font-weight: 200;
+  color: ${(props) => props.color};
+  margin: 0;
 `;
 
 const StyledBoldText = styled.p<boldTextPropsInterface>`
-  font-weight: 500;
+  font-weight: ${(props) => (props.weight ? props.weight : 700)};
   text-transform: uppercase;
   text-align: center;
   font-size: ${(props) => props.fontSize}rem;
+  margin: 0;
+  letter-spacing: 0.09;
 `;
 
 const StyledImage = styled.img`
@@ -115,6 +178,14 @@ const StyledImage = styled.img`
   }
 `;
 
+const StyledButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const StyledButton = styled.button`
   background-color: #313131;
   color: white;
@@ -124,6 +195,7 @@ const StyledButton = styled.button`
   letter-spacing: 0.8px;
   transition: 0.2s;
   border: none;
+
   cursor: pointer;
   &:hover {
     background-color: black;
@@ -142,6 +214,7 @@ const StyledLink = styled(Link)`
   letter-spacing: 0.8px;
   transition: 0.2s;
   border: none;
+  margin-bottom: 1rem;
   cursor: pointer;
   &:hover {
     background-color: black;
