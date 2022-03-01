@@ -98,7 +98,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledImageContainer = styled.div`
-  width: 50%;
+  width: 37%;
   height: 60%;
   display: flex;
   align-items: center;
@@ -107,7 +107,6 @@ const StyledImageContainer = styled.div`
     flex-direction: column;
     height: 30%;
     width: 90%;
-    
   }
 `;
 
