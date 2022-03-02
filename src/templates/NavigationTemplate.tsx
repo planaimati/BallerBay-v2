@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { BiMenu } from "react-icons/bi";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -181,6 +182,15 @@ const StyledLink = styled(NavLink)`
   &.active {
     font-weight: 700;
   }
+`;
+
+///mobile menu
+
+const StyledHamburgerContainer = styled.div`
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  display: flex;
 `;
 
 export default NavigationTemplate;
