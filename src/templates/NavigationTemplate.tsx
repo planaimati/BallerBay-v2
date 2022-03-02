@@ -1,24 +1,45 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypeSelector";
+
+interface menuInterface {
+  active?: boolean;
+  admin?: boolean;
+}
+
 const NavigationTemplate: FC = () => {
   let location = useLocation();
   const { admin } = useTypedSelector((state) => state.user);
   const { cart } = useTypedSelector((state) => state.cart);
 
+  console.log(admin);
+
+  const [menu, setMemenu] = useState(false);
+
+  const handleSetMenu = () => {
+    setMemenu((prevState) => !prevState);
+  };
+
   return (
     <StyledNavContainer>
-      <StyledLeftSideContainer>
-        <StyledLogoContainer>
-          <LogoLink to="/">baller bay</LogoLink>
-        </StyledLogoContainer>
+      <StyledHamburgerContainer>
+        <BiMenu onClick={handleSetMenu} />
+      </StyledHamburgerContainer>
 
-        <StyledList>
+      <StyledLogoContainer>
+        <LogoLink to="/" onClick={handleSetMenu}>
+          baller bay
+        </LogoLink>
+      </StyledLogoContainer>
+
+      <StyledListContainer active={menu}>
+        <StyledList admin={admin}>
           <StyledListItem>
             <StyledLink
+              onClick={handleSetMenu}
               color={location.pathname === "/" ? "black" : "black"}
               to="/products"
             >
@@ -27,18 +48,17 @@ const NavigationTemplate: FC = () => {
           </StyledListItem>
           <StyledListItem>
             <StyledLink
+              onClick={handleSetMenu}
               color={location.pathname === "/" ? "black" : "black"}
               to="/about"
             >
               O nas
             </StyledLink>
           </StyledListItem>
-        </StyledList>
-      </StyledLeftSideContainer>
-      <StyledRightSideContainer>
-        <StyledRightSideList>
+          <StyledEmpty></StyledEmpty>
           <StyledListItem>
             <StyledLink
+              onClick={handleSetMenu}
               color={location.pathname === "/" ? "black" : "black"}
               to="/contact"
             >
@@ -46,11 +66,14 @@ const NavigationTemplate: FC = () => {
             </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to={"/login"}>konto</StyledLink>
+            <StyledLink onClick={handleSetMenu} to={"/login"}>
+              konto
+            </StyledLink>
           </StyledListItem>
           {admin ? (
             <StyledListItem>
               <StyledLink
+                onClick={handleSetMenu}
                 color={location.pathname === "/" ? "black" : "black"}
                 to="/admin"
               >
@@ -59,63 +82,36 @@ const NavigationTemplate: FC = () => {
             </StyledListItem>
           ) : null}
           <StyledListItem>
-            <StyledLink to={"/cart"}>{`koszyk(${cart.length})`}</StyledLink>
+            <StyledLink
+              onClick={handleSetMenu}
+              to={"/cart"}
+            >{`koszyk(${cart.length})`}</StyledLink>
           </StyledListItem>
-        </StyledRightSideList>
-      </StyledRightSideContainer>
+        </StyledList>
+      </StyledListContainer>
     </StyledNavContainer>
   );
 };
 
 const StyledNavContainer = styled.div`
   position: fixed;
-  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
-  height: 5%;
+  height: 5vh;
+  z-index: 2;
   background-color: white;
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 17%;
-  }
-  @media (max-width: 500px) {
-    flex-direction: column;
-    height: 20%;
-    justify-content: space-between;
-  }
-`;
-
-const StyledLeftSideContainer = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100%;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: 38%;
-  }
-`;
-
-const StyledRightSideContainer = styled.div`
-  width: 50%;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: flex-end;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: 38%;
   }
 `;
 
 const StyledLogoContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  width: 16rem;
 `;
 const LogoLink = styled(Link)`
   text-decoration: none;
@@ -133,38 +129,58 @@ const LogoLink = styled(Link)`
     font-size: 1.5rem;
   }
 `;
-
-const StyledList = styled.ul`
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  list-style: none;
-  margin: 0;
-  width: 30%;
+const StyledListContainer = styled.div<menuInterface>`
+  width: calc(100% - 16rem);
   height: 100%;
-  text-transform: uppercase;
-  text-decoration: none;
-  @media (max-width: 1024px) {
-    width: 50%;
-  }
-
+  background-color: white;
+  display: flex;
   @media (max-width: 768px) {
-    flex-direction: column;
+    position: absolute;
+    top: 5vh;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: ${(props) => (props.active ? "block" : "none")};
+    background-color: #dcdcdc;
   }
 `;
 
-const StyledRightSideList = styled(StyledList)`
-  width: 40%;
-  @media (max-width: 1024px) {
-    width: 60%;
+const StyledList = styled.ul<menuInterface>`
+  padding: 0;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.admin
+      ? "100px 100px 1fr 100px 100px 100px 100px"
+      : "100px 100px 1fr 100px 100px 100px"};
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  text-decoration: none;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: ${(props) =>
+      props.admin
+        ? "5rem 5rem 5rem 5rem 5rem 5rem"
+        : "5rem 5rem 5rem 5rem 5rem"};
+    align-items: center;
+    justify-items: center;
   }
 `;
 
 const StyledListItem = styled.li`
-  text-align: center;
-  @media (max-width: 500px) {
+  height: auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 768px) {
     padding: 5px;
+    text-align: left;
+    height: 5rem;
+    border-bottom: 1px solid black;
   }
 `;
 
@@ -175,22 +191,36 @@ const StyledLink = styled(NavLink)`
   letter-spacing: 0.07rem;
   text-decoration: none;
   color: ${(props) => (props.color === "white" ? "white" : "black")};
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     letter-spacing: 0.3rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   &.active {
     font-weight: 700;
   }
 `;
 
+const StyledEmpty = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 ///mobile menu
 
 const StyledHamburgerContainer = styled.div`
+  top: 0;
+  right: 0;
   position: absolute;
-  height: 5rem;
-  width: 5rem;
-  display: flex;
+  display: none;
+  height: 5vh;
+  width: 5vh;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export default NavigationTemplate;
