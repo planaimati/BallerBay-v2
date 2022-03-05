@@ -37,12 +37,12 @@ const CartTemplate = () => {
 };
 
 const StyledContainer = styled.div`
-  padding-top: 150px;
   display: flex;
   position: relative;
   flex-direction: column;
   margin: 0 auto;
-  width: 80vw;
+  width: 100%;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   @media (max-width: 700px) {

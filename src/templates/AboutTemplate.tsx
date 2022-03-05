@@ -104,7 +104,6 @@ const StyledText = styled.p`
   font-weight: 200;
   text-align: center;
   line-height: 2.8rem;
-  letter-spacing: 0.1rem;
   word-wrap: break-word;
   margin-top: 3rem;
   margin-bottom: 3rem;

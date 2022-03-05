@@ -49,22 +49,4 @@ const StyledImage = styled.div<imageContainerProps>`
   }
 `;
 
-const StyledBanner = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledTitle = styled.p`
-  text-transform: uppercase;
-  font-size: 4rem;
-  letter-spacing: 2px;
-  color: white;
-  margin: 0;
-  @media (max-width: 700px) {
-    font-size: 2rem;
-  }
-`;
-
 export default HeroComponent;
