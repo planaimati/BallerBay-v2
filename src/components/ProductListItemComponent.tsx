@@ -36,7 +36,8 @@ const ProductListItem: FC<propsInterface> = (props) => {
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 35rem;
+  width: 19rem;
   justify-items: center;
   align-items: center;
   border-bottom: 1px solid black;

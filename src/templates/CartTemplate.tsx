@@ -13,24 +13,28 @@ const CartTemplate = () => {
       <StyledHeaderContainer>
         <StyledHeader>koszyk</StyledHeader>
       </StyledHeaderContainer>
-      <StyledCartItemContainer></StyledCartItemContainer>
-      <StyledSummaryContainer>
-        <StyledSummary></StyledSummary>
-      </StyledSummaryContainer>
+
       {cart.length > 0 ? (
-        cart.map((item) => (
-          <CartItemComponent
-            key={item._id}
-            _id={item._id}
-            productAmount={item.productAmount}
-            productBrand={item.productBrand}
-            productImage={item.productImage}
-            productName={item.productName}
-            productPrice={item.productPrice}
-            productSize={item.productSize}
-            productDesc={item.productDesc}
-          />
-        ))
+        <StyledContentContainer>
+          <StyledCartItemContainer>
+            {cart.map((item) => (
+              <CartItemComponent
+                key={item._id}
+                _id={item._id}
+                productAmount={item.productAmount}
+                productBrand={item.productBrand}
+                productImage={item.productImage}
+                productName={item.productName}
+                productPrice={item.productPrice}
+                productSize={item.productSize}
+                productDesc={item.productDesc}
+              />
+            ))}
+          </StyledCartItemContainer>
+          <StyledSummaryContainer>
+            <StyledSummary></StyledSummary>
+          </StyledSummaryContainer>
+        </StyledContentContainer>
       ) : (
         <>
           <StyledInfo>Twój koszyk jest pusty.</StyledInfo>
@@ -46,35 +50,49 @@ const CartTemplate = () => {
 const StyledContainer = styled.div`
   display: flex;
   position: relative;
-  flex-direction: row;
+  flex-direction: column;
   margin: 0 auto;
   width: 100%;
   height: 100vh;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 `;
 
 const StyledHeaderContainer = styled.div`
   width: 100%;
   height: 10%;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
 `;
 
 const StyledHeader = styled.h5`
   font-size: 1.3rem;
   font-weight: 300;
   text-transform: uppercase;
-  margin-left: 5rem;
+  padding-left: 1rem;
+  margin: 0;
 `;
 
-const StyledCartItemContainer = styled.div``;
+const StyledContentContainer = styled.div`
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0 1rem;
+`;
+
+const StyledCartItemContainer = styled.div`
+  height: 100%;
+  width: 58%;
+  border-top: 1px solid black;
+`;
 
 const StyledSummaryContainer = styled.div`
-height: ;
-width: ;
+  height: 100%;
+  width: 20%;
 `;
 
 const StyledSummary = styled.div`

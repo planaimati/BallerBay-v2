@@ -16,70 +16,112 @@ interface cartItemPropsInterface {
 }
 
 const CartItemComponent: FC<cartItemPropsInterface> = (props) => {
-  const {
-    productName,
-    productBrand,
-    productPrice,
-    productImage,
-    productSize,
-    _id,
-  } = props;
+  const { productBrand, productPrice, productImage, productSize, _id } = props;
   const dispatch = useDispatch();
   const { handleDeleteCart } = bindActionCreators(actionCreators, dispatch);
   return (
     <StyledContainer>
-      <StyledImage src={productImage}></StyledImage>
+      <StyledImageContainer>
+        <StyledImage src={productImage}></StyledImage>
+      </StyledImageContainer>
+
       <StyledSmallContainer>
-        <StyledHeader>{productName}</StyledHeader>
-        <StyledText>{productBrand}</StyledText>
-        <StyledText>{productSize}</StyledText>
-        <StyledText>{productPrice}</StyledText>
-        <StyledButton onClick={() => handleDeleteCart(_id)}>Usuń</StyledButton>
+        <StyledTextContainer>
+          <StyledText>{productBrand}</StyledText>
+          <StyledText>category</StyledText>
+          <StyledText>{productSize}</StyledText>
+          <StyledText>color</StyledText>
+          <StyledText>{productPrice}</StyledText>
+        </StyledTextContainer>
+
+        <StyledRemoveButtonContainer>
+          <StyledRemoveButton onClick={() => handleDeleteCart(_id)}>
+            X Usuń
+          </StyledRemoveButton>
+        </StyledRemoveButtonContainer>
       </StyledSmallContainer>
     </StyledContainer>
   );
 };
 
 const StyledContainer = styled.article`
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 1.5rem;
-  margin: 1.5rem 0;
-  min-height: 350px;
+  display: flex;
+  align-items: space-around;
+  justify-content: flex-start;
+  width: 100%;
+
   @media (max-width: 700px) {
     grid-column-gap: 0;
     grid-template-columns: 1fr;
     border-bottom: 1px solid black;
   }
 `;
+const StyledTextContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 40%;
+  width: 100%;
+  flex-direction: column;
+`;
 
-const StyledHeader = styled.h4``;
-
-const StyledText = styled.p``;
+const StyledText = styled.p`
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-transform: capitalize;
+  margin: 0;
+`;
 
 const StyledImage = styled.img`
-  width: 200px;
-  max-height: 250px;
-`;
-const StyledButton = styled.button`
-  background-color: #313131;
-  color: white;
-  text-transform: uppercase;
+  height: 100%;
   width: 100%;
-  height: 50px;
-  letter-spacing: 0.8px;
-  transition: 0.2s;
+`;
+
+const StyledImageContainer = styled.div`
+  width: 19rem;
+  height: 29rem;
+`;
+// const StyledButton = styled.button`
+//   background-color: #313131;
+//   color: white;
+//   text-transform: uppercase;
+//   width: 100%;
+//   height: 5rem;
+//   letter-spacing: 0.8px;
+//   transition: 0.2s;
+//   border: none;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: black;
+//   }
+// `;
+
+const StyledRemoveButton = styled.button`
+  font-size: 1.1rem;
+  font-weight: 300;
   border: none;
+  background: none;
+  padding: 0;
   cursor: pointer;
-  &:hover {
-    background-color: black;
-  }
+`;
+
+const StyledRemoveButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  padding: 1rem;
 `;
 
 const StyledSmallContainer = styled.div`
   text-transform: uppercase;
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 30%;
+  height: 29rem;
 `;
 
 export default CartItemComponent;

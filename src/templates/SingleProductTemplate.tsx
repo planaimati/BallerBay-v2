@@ -102,7 +102,8 @@ const StyledImageContainer = styled.div`
   height: 60%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 5rem;
   @media (max-width: 768px) {
     flex-direction: column;
     height: 30%;
@@ -169,8 +170,8 @@ const StyledBoldText = styled.p<boldTextPropsInterface>`
 `;
 
 const StyledImage = styled.img`
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 60%;
   @media (max-width: 768px) {
     height: 100%;
     width: 100%;
