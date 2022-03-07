@@ -10,6 +10,13 @@ const CartTemplate = () => {
 
   return (
     <StyledContainer>
+      <StyledHeaderContainer>
+        <StyledHeader>koszyk</StyledHeader>
+      </StyledHeaderContainer>
+      <StyledCartItemContainer></StyledCartItemContainer>
+      <StyledSummaryContainer>
+        <StyledSummary></StyledSummary>
+      </StyledSummaryContainer>
       {cart.length > 0 ? (
         cart.map((item) => (
           <CartItemComponent
@@ -39,16 +46,41 @@ const CartTemplate = () => {
 const StyledContainer = styled.div`
   display: flex;
   position: relative;
-  flex-direction: column;
+  flex-direction: row;
   margin: 0 auto;
   width: 100%;
   height: 100vh;
   align-items: center;
   justify-content: center;
-  @media (max-width: 700px) {
-    min-height: 80vh;
-    width: 90%;
-  }
+  flex-wrap: wrap;
+`;
+
+const StyledHeaderContainer = styled.div`
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const StyledHeader = styled.h5`
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-left: 5rem;
+`;
+
+const StyledCartItemContainer = styled.div``;
+
+const StyledSummaryContainer = styled.div`
+height: ;
+width: ;
+`;
+
+const StyledSummary = styled.div`
+  background-color: #d3d3d3;
+  height: 30%;
+  width: 100%;
 `;
 
 const StyledLink = styled(Link)`

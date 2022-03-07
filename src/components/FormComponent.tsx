@@ -31,6 +31,7 @@ const FormComponent: FC<formComponentInterface> = (
   );
 
   const { haveAccount } = useTypedSelector((state) => state.haveAccount);
+  const { message } = useTypedSelector((state) => state.message);
   const { logedIn } = useTypedSelector((state) => state.logIn);
 
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const FormComponent: FC<formComponentInterface> = (
     handleLogIn,
     handleSetUser,
     handleDeleteUser,
+    handleSetMessage,
   } = bindActionCreators(actionCreators, dispatch);
 
   return (
@@ -74,7 +76,7 @@ const FormComponent: FC<formComponentInterface> = (
         })}
       </StyledInputsContainer>
       <StyledMessageContainer logedIn={logedIn}>
-        <StyledMessageText>wprowadź dane</StyledMessageText>
+        <StyledMessageText>{message}</StyledMessageText>
       </StyledMessageContainer>
 
       <StyledButton
@@ -92,6 +94,7 @@ const FormComponent: FC<formComponentInterface> = (
                   handleEmailInput,
                   handlePasswordInput,
                   handleConfirmPasswordInput,
+                  handleSetMessage,
                   confirmPassword
                 )
             : (e) => logOutFunction(e, handleLogIn, handleDeleteUser)
@@ -110,6 +113,9 @@ const StyledForm = styled.form`
   flex-direction: column;
   width: 60%;
   height: 100%;
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -151,7 +157,10 @@ const StyledMessageContainer = styled.div<containerProps>`
   display: ${(props) => (props.logedIn ? "none" : "flex")};
 `;
 
-const StyledMessageText = styled.p``;
+const StyledMessageText = styled.p`
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+`;
 
 const StyledButton = styled.button`
   background-color: #313131;

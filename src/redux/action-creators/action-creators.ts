@@ -17,6 +17,7 @@ import {
   productsActionInterface,
 } from "../reducers/productsReducer";
 import { cartItemType } from "../reducers/cartReducer";
+import {messageActionInterface} from '../reducers/messageReducer'
 
 export const changeHaveAccount = () => {
   return (dispatch: Dispatch<userHaveAccountAction>) => {
@@ -106,7 +107,7 @@ export const handleSetCart = (payload: cartItemType) => {
 };
 
 export const handleDeleteCart = (payload: string) => {
-  console.log(payload);
+  
 
   return (dispatch: Dispatch<CartAction>) => {
     dispatch({
@@ -115,3 +116,14 @@ export const handleDeleteCart = (payload: string) => {
     });
   };
 };
+
+export const handleSetMessage = (payload: string)=>{
+
+  return (dispatch: Dispatch<messageActionInterface>)=>{
+    dispatch({
+      type: "SET_MESSAGE",
+      payload: payload
+    })
+  }
+
+}

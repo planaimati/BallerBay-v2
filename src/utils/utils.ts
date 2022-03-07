@@ -12,6 +12,7 @@ export const logInFunction = (
   setLoginValue: (e: string) => void,
   setPasswordValue: (e: string) => void,
   setConfirmPasswordValue: (e: string) => void,
+  setMessage: (payload: string) => void,
   confirmPassword?: string
 ) => {
   e.preventDefault();
@@ -46,6 +47,7 @@ export const logInFunction = (
     })
     .then((data) => {
       setUser(data);
+      setMessage(data.msg);
     });
 };
 
