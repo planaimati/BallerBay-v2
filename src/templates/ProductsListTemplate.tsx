@@ -43,20 +43,24 @@ const StyledContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
 const StyledItemsContainer = styled.div`
   height: 70%;
-  margin: 150px auto 0 auto;
-  width: 1170px;
+  margin: 5rem auto 0 auto;
+  width: 90%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   @media (max-width: 768px) {
+    width: 100%;
     flex-direction: column;
+    align-items: center;
+    margin: 2rem auto 0 auto;
   }
 `;
 

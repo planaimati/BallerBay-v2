@@ -9,21 +9,20 @@ const AboutTemplate = () => {
         <StyledImageContainer></StyledImageContainer>
         <StyledTextContainer>
           <StyledHeaderContainer>
-            <StyledHeader>Kim jesteśmy?</StyledHeader>
+            <StyledMainHeader>Kim jesteśmy?</StyledMainHeader>
           </StyledHeaderContainer>
           <StyledText>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio
-            corrupti, hic quae laboriosam eveniet illo ipsum quaerat nobis nulla
-            culpa! Sit molestias deserunt mollitia nulla rem architecto optio
-            quia, asperiores amet adipisci quae eius? Vero beatae consequatur
-            sapiente deleniti magnam. Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Alias, amet voluptates nam perferendis voluptate
-            reprehenderit maiores nobis neque eveniet ad consectetur provident,
-            exercitationem pariatur, soluta expedita.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Repellendus ipsa fugit saepe, iusto assumenda magnam doloremque
+            autem. Magnam iste maxime nesciunt perspiciatis ea. Ea numquam
+            doloribus tenetur velit, nisi dignissimos? Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Quisquam, dolor voluptatem. Rem
+            odit inventore incidunt ut aperiam? At adipisci voluptate accusamus
+            minus ullam nostrum quibusdam, provident, minima autem quis porro.
           </StyledText>
 
           <StyledHeaderContainer>
-            <StyledHeader>Dlaczego warto nam zaufać</StyledHeader>
+            <StyledMainHeader>Dlaczego warto nam zaufać</StyledMainHeader>
           </StyledHeaderContainer>
 
           <StyledText>
@@ -53,7 +52,7 @@ const AboutTemplate = () => {
 };
 
 const StyledContainer = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -63,19 +62,19 @@ const StyledContainer = styled.div`
 
 const StyledContentContainer = styled.div`
   width: 100%;
+  height: 70%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 17vh;
+
   @media (max-width: 768px) {
-    margin-top: 22rem;
   }
 `;
 
 const StyledImageContainer = styled.div`
   height: 25rem;
-  width: 100rem;
+  width: 90rem;
   background-image: url("https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-position: bottom;
   background-size: cover;
@@ -92,7 +91,7 @@ const StyledTextContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 5rem;
-  width: 100rem;
+  width: 90rem;
   @media (max-width: 1024px) {
     width: 90%;
   }
@@ -103,7 +102,7 @@ const StyledText = styled.p`
   font-size: 1.4rem;
   font-weight: 200;
   text-align: center;
-  line-height: 2.8rem;
+  line-height: 1.5rem;
   word-wrap: break-word;
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -120,21 +119,11 @@ const StyledHeaderContainer = styled.div`
   width: 100%;
 `;
 
-const StyledHeader = styled.h1`
-  font-size: 2rem;
-  color: #111111;
-  font-weight: 300;
-  letter-spacing: 0.3rem;
-  @media (max-width: 768px) {
-    font-size: 1.7rem;
-  }
-`;
-
 const StyledLine = styled.div`
   height: 0.01rem;
   width: 60%;
   background-color: grey;
-  margin: 4rem 0 4rem 0;
+  margin: 2rem 0 2rem 0;
 `;
 
 const StyledInstagram = styled(FaInstagram)`
@@ -150,7 +139,7 @@ const StyledSocialContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   width: 40%;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 `;
 
 const StyledIconContainer = styled.div`
@@ -167,6 +156,14 @@ const StyledIconContainer = styled.div`
   &:hover {
     filter: brightness(0.8);
   }
+`;
+
+const StyledMainHeader = styled.h5`
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding-left: 1rem;
+  margin: 0;
 `;
 
 export default AboutTemplate;

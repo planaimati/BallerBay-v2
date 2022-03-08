@@ -30,9 +30,7 @@ const NavigationTemplate: FC = () => {
       </StyledHamburgerContainer>
 
       <StyledLogoContainer>
-        <LogoLink to="/" onClick={handleSetMenu}>
-          baller bay
-        </LogoLink>
+        <LogoLink to="/">baller bay</LogoLink>
       </StyledLogoContainer>
 
       <StyledListContainer active={menu}>

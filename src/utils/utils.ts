@@ -23,7 +23,7 @@ export const logInFunction = (
     confirmPassword: confirmPassword,
   };
 
-  fetch(`http://localhost:8000/api/v1/${url}`, {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export const logOutFunction = (
 ) => {
   e.preventDefault();
 
-  fetch(`http://localhost:8000/api/v1/logout`)
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/logout`)
     .then((response) => {
       if (response.ok) {
         logout(e, false);

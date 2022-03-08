@@ -19,6 +19,7 @@ const CartItemComponent: FC<cartItemPropsInterface> = (props) => {
   const { productBrand, productPrice, productImage, productSize, _id } = props;
   const dispatch = useDispatch();
   const { handleDeleteCart } = bindActionCreators(actionCreators, dispatch);
+
   return (
     <StyledContainer>
       <StyledImageContainer>
@@ -31,7 +32,7 @@ const CartItemComponent: FC<cartItemPropsInterface> = (props) => {
           <StyledText>category</StyledText>
           <StyledText>{productSize}</StyledText>
           <StyledText>color</StyledText>
-          <StyledText>{productPrice}</StyledText>
+          <StyledText>PRODUKT DOSTĘPNY</StyledText>
         </StyledTextContainer>
 
         <StyledRemoveButtonContainer>
@@ -39,6 +40,12 @@ const CartItemComponent: FC<cartItemPropsInterface> = (props) => {
             X Usuń
           </StyledRemoveButton>
         </StyledRemoveButtonContainer>
+      </StyledSmallContainer>
+      <StyledSmallContainer>
+        <StyledText>{`PLN ${productPrice}`}</StyledText>
+      </StyledSmallContainer>
+      <StyledSmallContainer>
+        <StyledText>{`Ilość ${1}`}</StyledText>
       </StyledSmallContainer>
     </StyledContainer>
   );
@@ -48,16 +55,15 @@ const StyledContainer = styled.article`
   display: flex;
   align-items: space-around;
   justify-content: flex-start;
-  width: 100%;
-
+  width: 95%;
+  margin: 0;
+  margin-top: 1rem;
   @media (max-width: 700px) {
-    grid-column-gap: 0;
-    grid-template-columns: 1fr;
-    border-bottom: 1px solid black;
+    font-size: 1rem;
+    justify-content: space-around;
   }
 `;
 const StyledTextContainer = styled.div`
-  padding: 1rem;
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
@@ -71,6 +77,9 @@ const StyledText = styled.p`
   font-weight: 300;
   text-transform: capitalize;
   margin: 0;
+  @media (max-width: 700px) {
+    font-size: 1rem;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -81,21 +90,11 @@ const StyledImage = styled.img`
 const StyledImageContainer = styled.div`
   width: 19rem;
   height: 29rem;
+
+  @media (max-width: 700px) {
+    width: 18rem;
+  }
 `;
-// const StyledButton = styled.button`
-//   background-color: #313131;
-//   color: white;
-//   text-transform: uppercase;
-//   width: 100%;
-//   height: 5rem;
-//   letter-spacing: 0.8px;
-//   transition: 0.2s;
-//   border: none;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: black;
-//   }
-// `;
 
 const StyledRemoveButton = styled.button`
   font-size: 1.1rem;
@@ -112,6 +111,9 @@ const StyledRemoveButtonContainer = styled.div`
   justify-content: center;
   height: 50%;
   padding: 1rem;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const StyledSmallContainer = styled.div`
@@ -122,6 +124,11 @@ const StyledSmallContainer = styled.div`
   justify-content: flex-start;
   width: 30%;
   height: 29rem;
+  padding: 1rem;
+  @media (max-width: 700px) {
+    width: 15%;
+    padding: 0;
+  }
 `;
 
 export default CartItemComponent;

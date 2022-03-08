@@ -42,6 +42,10 @@ const StyledContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid black;
   margin: 2rem;
+  @media (max-width: 700px) {
+    height: 45rem;
+    width: 24rem;
+  }
 `;
 const StyledImage = styled.img`
   width: 100%;
@@ -79,9 +83,6 @@ const StyledImageContainer = styled.div`
   position: relative;
   height: 70%;
   width: 100%;
-  @media (max-width: 700px) {
-    width: 100%;
-  }
 `;
 
 const StyledTitle = styled.h4`

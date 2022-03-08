@@ -105,9 +105,11 @@ const StyledImageContainer = styled.div`
   justify-content: flex-end;
   margin-right: 5rem;
   @media (max-width: 768px) {
+    margin-right: 0;
     flex-direction: column;
-    height: 30%;
-    width: 90%;
+    justify-content: center;
+    height: 45%;
+    width: 70%;
   }
 `;
 
@@ -119,7 +121,7 @@ const StyledInfoContainer = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   @media (max-width: 768px) {
-    width: 80%;
+    width: 70%;
     height: 30%;
     justify-content: space-around;
   }
