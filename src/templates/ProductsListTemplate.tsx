@@ -12,7 +12,7 @@ const ProductsListTemplate = () => {
   const dispatch = useDispatch();
   const { handleSetProducts } = bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
-    fetch(`https://ballerbay-api.herokuapp.com/api/v1/product`)
+    fetch(`http://localhost:8000/api/v1/product`)
       .then((response) => response.json())
       .then((data) => handleSetProducts(data));
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -23,7 +23,7 @@ const Root: FC = () => {
   const dispatch = useDispatch();
   const { handleSetProducts } = bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
-    fetch(`https://ballerbay-api.herokuapp.com/api/v1/product`, {
+    fetch(`http://localhost:8000/api/v1/product`, {
       credentials: "include",
     })
       .then((response) => response.json())
