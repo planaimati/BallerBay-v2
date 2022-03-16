@@ -2,10 +2,13 @@ import React from "react";
 import AdminPanelComponent from "../components/AdminPanelComponent";
 import styled from "styled-components";
 
+
 const AdminPanelTemplate = () => {
+  
+
   return (
     <StyledContainer>
-      <AdminPanelComponent />
+      <AdminPanelComponent  />
     </StyledContainer>
   );
 };

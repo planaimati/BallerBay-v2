@@ -25,6 +25,7 @@ export const logInFunction = (
 
   fetch(`https://ballerbay-api.herokuapp.com/api/v1/${url}`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -46,6 +47,8 @@ export const logInFunction = (
       return response.json();
     })
     .then((data) => {
+      console.log(data);
+
       setUser(data);
       setMessage(data.msg);
     });
@@ -68,4 +71,18 @@ export const logOutFunction = (
       return response.json();
     })
     .then((data) => console.log(data));
+};
+
+export const deleteProduct = (id: string) => {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/product/${id}`, {
+    method: "DELETE",
+    mode: "cors",
+    credentials: "include",
+  });
+};
+
+export const getSingleProduct = (id: string, edit: Function) => {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/product/${id}`)
+    .then((response) => response.json())
+    .then((data) => edit(data.product));
 };

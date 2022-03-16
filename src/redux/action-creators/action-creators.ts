@@ -17,7 +17,8 @@ import {
   productsActionInterface,
 } from "../reducers/productsReducer";
 import { cartItemType } from "../reducers/cartReducer";
-import {messageActionInterface} from '../reducers/messageReducer'
+import { messageActionInterface } from "../reducers/messageReducer";
+import { editActionInterface , editPayloadType} from "../reducers/editReducer";
 
 export const changeHaveAccount = () => {
   return (dispatch: Dispatch<userHaveAccountAction>) => {
@@ -107,8 +108,6 @@ export const handleSetCart = (payload: cartItemType) => {
 };
 
 export const handleDeleteCart = (payload: string) => {
-  
-
   return (dispatch: Dispatch<CartAction>) => {
     dispatch({
       type: CartActionType.DELETE,
@@ -117,13 +116,25 @@ export const handleDeleteCart = (payload: string) => {
   };
 };
 
-export const handleSetMessage = (payload: string)=>{
-
-  return (dispatch: Dispatch<messageActionInterface>)=>{
+export const handleSetMessage = (payload: string) => {
+  return (dispatch: Dispatch<messageActionInterface>) => {
     dispatch({
       type: "SET_MESSAGE",
-      payload: payload
-    })
-  }
+      payload: payload,
+    });
+  };
+};
 
-}
+export const handleSetEdit = (payload: editPayloadType) => {
+
+  console.log(payload);
+  
+
+
+  return (dispatch: Dispatch<editActionInterface>) => {
+    dispatch({
+      type: "SET_EDIT",
+      payload: payload,
+    });
+  };
+};

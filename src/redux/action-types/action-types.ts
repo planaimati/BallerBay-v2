@@ -72,7 +72,6 @@ export enum UserActionType {
 export type userPayloadType = {
   admin: boolean;
   email: string;
-  password: string;
 };
 
 export interface setUserActionInterface {

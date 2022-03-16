@@ -1,6 +1,12 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { Formik, FormikHelpers as FormikActions, Form, Field } from "formik";
 import styled from "styled-components";
+import { useTypedSelector } from "../hooks/useTypeSelector";
+import { editPayloadType } from "../redux/reducers/editReducer";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../redux/xd";
+import { bindActionCreators } from "redux";
+import * as Yup from "yup";
 
 interface Values {
   productName: string;
@@ -13,6 +19,20 @@ interface Values {
 }
 
 const AdminPanelComponent = () => {
+  const { product, edit } = useTypedSelector((state) => state.edit);
+  const dispatch = useDispatch();
+  const { handleSetEdit } = bindActionCreators(actionCreators, dispatch);
+
+  const validationSchema = Yup.object().shape({
+    productName: Yup.string().required("Pole wymagane"),
+    productPrice: Yup.number().required("Pole wymagane"),
+    productBrand: Yup.string().required("Pole wymagane"),
+    productAmount: Yup.number().required("Pole wymagane"),
+    productDesc: Yup.string().required("Pole wymagane"),
+    productImage: Yup.string().required("Pole wymagane"),
+    productSize: Yup.string().required("Pole wymagane"),
+  });
+
   return (
     <StyledContainer>
       <StyledHeader>Dodaj produkt</StyledHeader>
@@ -26,69 +46,127 @@ const AdminPanelComponent = () => {
           productDesc: "",
           productImage: "",
         }}
-        onSubmit={(
-          values: Values,
+        validationSchema={validationSchema}
+        onSubmit={
+          !edit
+            ? (
+                values: Values,
 
-          { resetForm }: FormikActions<Values>
-        ) => {
-          console.log(values);
+                { resetForm }: FormikActions<Values>
+              ) => {
+                console.log(values);
 
-          fetch("https://ballerbay-api.herokuapp.com/api/v1/product", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-          }).then((response) => (response.ok ? resetForm() : null));
-        }}
+                fetch("https://ballerbay-api.herokuapp.com/api/v1/product", {
+                  method: "POST",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  credentials: "include",
+                  body: JSON.stringify(values),
+                }).then((response) => (response.ok ? resetForm() : null));
+              }
+            : (
+                values: Values,
+
+                { resetForm }: FormikActions<Values>
+              ) => {
+                console.log(values);
+
+                fetch(
+                  `https://ballerbay-api.herokuapp.com/api/v1/product/${product._id}`,
+                  {
+                    method: "PATCH",
+                    mode: "cors",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(values),
+                  }
+                ).then((response) => {
+                  if (response.ok) {
+                    resetForm();
+                    handleSetEdit({});
+                  }
+                });
+              }
+        }
       >
-        {(formProps) => (
-          <StyledForm action="">
-            <InputContainer>
-              <StyledLabel htmlFor="itemName">Nazwa</StyledLabel>
-              <StyledInput type="text" name="productName"></StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="itemPrice">Cena</StyledLabel>
-              <StyledInput type="text" name="productPrice"></StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="productSize">Rozmiar</StyledLabel>
-              <StyledInput
-                as="select"
-                name="productSize"
-                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  formProps.setFieldValue("productSize", e.target.value)
-                }
-              >
-                <option value=""></option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="itemBrand">Marka</StyledLabel>
-              <StyledInput type="text" name="productBrand"></StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="itemAmount">Ilość</StyledLabel>
-              <StyledInput type="text" name="productAmount"></StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="itemDesc">Opis</StyledLabel>
-              <StyledInput type="text" name="productDesc"></StyledInput>
-            </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor="image">Zdjęcie</StyledLabel>
-              <StyledInput type="text" name="productImage"></StyledInput>
-            </InputContainer>
+        {function DefaultFunc({ errors, setFieldValue }) {
+          useEffect(() => {
+            const fields = [
+              "productName",
+              "productPrice",
+              "productSize",
+              "productBrand",
+              "productAmount",
+              "productDesc",
+              "productImage",
+            ];
 
-            <StyledButton type="submit">dodaj produkt</StyledButton>
-          </StyledForm>
-        )}
+            if (edit) {
+              fields.forEach((field) =>
+                setFieldValue(
+                  field,
+                  product[field as keyof editPayloadType],
+                  false
+                )
+              );
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+          }, []);
+
+          return (
+            <StyledForm action="">
+              <InputContainer>
+                <StyledLabel htmlFor="itemName">Nazwa</StyledLabel>
+                <StyledInput type="text" name="productName"></StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="itemPrice">Cena</StyledLabel>
+                <StyledInput type="text" name="productPrice"></StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="productSize">Rozmiar</StyledLabel>
+                <StyledInput
+                  as="select"
+                  name="productSize"
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                    setFieldValue("productSize", e.target.value)
+                  }
+                >
+                  <option value=""></option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="itemBrand">Marka</StyledLabel>
+                <StyledInput type="text" name="productBrand"></StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="itemAmount">Ilość</StyledLabel>
+                <StyledInput type="text" name="productAmount"></StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="itemDesc">Opis</StyledLabel>
+                <StyledInput type="text" name="productDesc"></StyledInput>
+              </InputContainer>
+              <InputContainer>
+                <StyledLabel htmlFor="image">Zdjęcie</StyledLabel>
+                <StyledInput type="text" name="productImage"></StyledInput>
+              </InputContainer>
+
+              <StyledButton type="submit">
+                {edit ? "zatwierdź zmiany" : "dodaj produkt"}
+              </StyledButton>
+            </StyledForm>
+          );
+        }}
       </Formik>
     </StyledContainer>
   );

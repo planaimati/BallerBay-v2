@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/xd";
 import { bindActionCreators } from "redux";
+import { useNavigate } from "react-router-dom";
 
 interface boldTextPropsInterface {
   fontSize?: number;
@@ -15,14 +16,20 @@ interface boldTextPropsInterface {
 }
 
 const SingleProductTemplate = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const { products } = useTypedSelector((state) => state.products);
   const { logedIn } = useTypedSelector((state) => state.logIn);
+  const { admin } = useTypedSelector((state) => state.user);
 
   const singleProduct = products.find((item) => item._id === id);
 
   const dispatch = useDispatch();
-  const { handleSetCart } = bindActionCreators(actionCreators, dispatch);
+  const { handleSetCart, handleSetEdit } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   if (!singleProduct) {
     return (
@@ -79,6 +86,44 @@ const SingleProductTemplate = () => {
               Dodaj do koszyka
             </StyledButton>
           )}
+          {admin ? (
+            <StyledAdminPanelContainer>
+              <StyledSmallLink
+                onClick={() =>
+                  fetch(
+                    `https://ballerbay-api.herokuapp.com/api/v1/product/${id}`,
+                    {
+                      credentials: "include",
+                    }
+                  )
+                    .then((response) => response.json())
+                    .then((data) => {
+                      handleSetEdit(data.product);
+                      navigate("/admin");
+                    })
+                }
+              >
+                edytuj
+              </StyledSmallLink>
+
+              <StyledSmallLink
+                onClick={() => {
+                  fetch(
+                    `https://ballerbay-api.herokuapp.com/api/v1/product/${id}`,
+                    {
+                      method: "DELETE",
+                      mode: "cors",
+                      credentials: "include",
+                    }
+                  ).then((response) =>
+                    response.ok ? navigate("/products") : null
+                  );
+                }}
+              >
+                usuń
+              </StyledSmallLink>
+            </StyledAdminPanelContainer>
+          ) : null}
         </StyledInfoContainer>
       </StyledContainer>
     );
@@ -153,6 +198,14 @@ const StyledColorInfoSmallContainer = styled.div<boldTextPropsInterface>`
   border-bottom: 1px solid black; ;
 `;
 
+const StyledAdminPanelContainer = styled.div`
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
 const StyledText = styled.p<boldTextPropsInterface>`
   text-transform: uppercase;
   font-size: ${(props) => props.fontSize}rem;
@@ -186,6 +239,26 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const StyledSmallLink = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #313131;
+  height: 80%;
+  width: 40%;
+  border: 1px solid black;
+  background-color: transparent;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    background-color: #313131;
+    color: white;
+  }
 `;
 
 const StyledButton = styled.button`
