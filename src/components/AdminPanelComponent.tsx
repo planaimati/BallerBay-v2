@@ -56,7 +56,7 @@ const AdminPanelComponent = () => {
               ) => {
                 console.log(values);
 
-                fetch("http://localhost:8000/api/v1/product", {
+                fetch("https://ballerbay-api.herokuapp.com/api/v1/product", {
                   method: "POST",
                   mode: "cors",
                   headers: {

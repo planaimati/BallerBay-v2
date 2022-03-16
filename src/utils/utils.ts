@@ -23,7 +23,7 @@ export const logInFunction = (
     confirmPassword: confirmPassword,
   };
 
-  fetch(`http://localhost:8000/api/v1/${url}`, {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/${url}`, {
     method: "POST",
     credentials: "include",
     headers: {
