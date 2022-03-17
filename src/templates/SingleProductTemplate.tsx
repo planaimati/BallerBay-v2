@@ -109,7 +109,7 @@ const SingleProductTemplate = () => {
               <StyledSmallLink
                 onClick={() => {
                   fetch(
-                    `http://localhost:8000/api/v1/product/${id}`,
+                    `https://ballerbay-api.herokuapp.com/api/v1/product/${id}`,
                     {
                       method: "DELETE",
                       mode: "cors",

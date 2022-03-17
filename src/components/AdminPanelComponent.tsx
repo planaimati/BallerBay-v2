@@ -59,10 +59,11 @@ const AdminPanelComponent = () => {
                 fetch("https://ballerbay-api.herokuapp.com/api/v1/product", {
                   method: "POST",
                   mode: "cors",
+                  credentials: "include",
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  credentials: "include",
+
                   body: JSON.stringify(values),
                 }).then((response) => (response.ok ? resetForm() : null));
               }
@@ -73,15 +74,18 @@ const AdminPanelComponent = () => {
               ) => {
                 console.log(values);
 
-                fetch(`http://localhost:8000/api/v1/product/${product._id}`, {
-                  method: "PATCH",
-                  mode: "cors",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  credentials: "include",
-                  body: JSON.stringify(values),
-                }).then((response) => {
+                fetch(
+                  `https://ballerbay-api.herokuapp.com/api/v1/product/${product._id}`,
+                  {
+                    method: "PATCH",
+                    mode: "cors",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(values),
+                  }
+                ).then((response) => {
                   if (response.ok) {
                     resetForm();
                     handleSetEdit({});

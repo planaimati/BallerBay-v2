@@ -61,7 +61,7 @@ export const logOutFunction = (
 ) => {
   e.preventDefault();
 
-  fetch(`http://localhost:8000/api/v1/logout`)
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/logout`)
     .then((response) => {
       if (response.ok) {
         logout(e, false);
@@ -74,7 +74,7 @@ export const logOutFunction = (
 };
 
 export const deleteProduct = (id: string) => {
-  fetch(`http://localhost:8000/api/v1/product/${id}`, {
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/product/${id}`, {
     method: "DELETE",
     mode: "cors",
     credentials: "include",
@@ -82,7 +82,7 @@ export const deleteProduct = (id: string) => {
 };
 
 export const getSingleProduct = (id: string, edit: Function) => {
-  fetch(`http://localhost:8000/api/v1/product/${id}`)
+  fetch(`https://ballerbay-api.herokuapp.com/api/v1/product/${id}`)
     .then((response) => response.json())
     .then((data) => edit(data.product));
 };
